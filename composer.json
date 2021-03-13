@@ -1,21 +1,21 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "casperboone/laravel-expiring-email",
+    "description": "Auto-expiring email notifications",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "casperboone",
+        "laravel-expiring-email"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/casperboone/laravel-expiring-email",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Casper Boone",
+            "email": "mail@casperboone.nl",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "spatie/laravel-package-tools": "^1.4.3",
         "illuminate/contracts": "^8.0"
     },
@@ -27,13 +27,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "CasperBoone\\LaravelExpiringEmail\\": "src",
+            "CasperBoone\\LaravelExpiringEmail\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "CasperBoone\\LaravelExpiringEmail\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "CasperBoone\\LaravelExpiringEmail\\LaravelExpiringEmailServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "LaravelExpiringEmail": "CasperBoone\\LaravelExpiringEmail\\LaravelExpiringEmailFacade"
             }
         }
     },

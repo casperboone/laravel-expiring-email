@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Skeleton\Commands;
+namespace CasperBoone\LaravelExpiringEmail\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelExpiringEmailCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-expiring-email';
 
     public $description = 'My command';
 

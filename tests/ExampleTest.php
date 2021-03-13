@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace CasperBoone\LaravelExpiringEmail\Tests;
 
 class ExampleTest extends TestCase
 {
