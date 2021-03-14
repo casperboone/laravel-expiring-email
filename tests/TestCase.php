@@ -3,6 +3,7 @@
 namespace CasperBoone\LaravelExpiringEmail\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as Orchestra;
 use CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider;
 
@@ -33,9 +34,13 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_laravel_expiring_email_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        $app['config']->set('mail.mailers.smtp.host', 'localhost');
+        $app['config']->set('mail.mailers.smtp.port', 1025);
+        $app['config']->set('mail.mailers.smtp.encryption', null);
+
+        View::addLocation(__DIR__ . '/views');
+
+        include_once __DIR__.'/../database/migrations/create_expiring_emails_table.php.stub';
+        (new \CreateExpiringEmailsTable())->up();
     }
 }

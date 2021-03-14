@@ -4,7 +4,6 @@ namespace CasperBoone\LaravelExpiringEmail;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CasperBoone\LaravelExpiringEmail\Commands\LaravelExpiringEmailCommand;
 
 class LaravelExpiringEmailServiceProvider extends PackageServiceProvider
 {
@@ -19,7 +18,7 @@ class LaravelExpiringEmailServiceProvider extends PackageServiceProvider
             ->name('laravel-expiring-email')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel_expiring_email_table')
-            ->hasCommand(LaravelExpiringEmailCommand::class);
+            ->hasMigration('create_expiring_emails_table')
+            ->hasRoute('web');
     }
 }

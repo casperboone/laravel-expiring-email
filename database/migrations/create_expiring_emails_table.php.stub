@@ -1,0 +1,21 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateExpiringEmailsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('expiring_emails', function (Blueprint $table) {
+            $table->id();
+            $table->string('recipient');
+            $table->string('subject');
+            $table->text('body');
+            $table->timestamp('expires_at');
+            $table->string('random_identifier')->index();
+            $table->timestamps();
+        });
+    }
+}
