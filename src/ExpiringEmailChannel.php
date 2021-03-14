@@ -27,7 +27,7 @@ class ExpiringEmailChannel
         $originalMail = $notification->toMail($notifiable);
         $recipient = $notifiable->routeNotificationFor('mail', $notification);
 
-        if (!$recipient) {
+        if (! $recipient) {
             throw InvalidEmailException::forEmail($recipient);
         }
 
@@ -43,7 +43,8 @@ class ExpiringEmailChannel
         Mail::to($recipient)->send(new ExpiringEmailAvailableMail($expiringEmail));
     }
 
-    private function getExpirationDate(MailMessage $originalMail): ?Carbon {
+    private function getExpirationDate(MailMessage $originalMail): ?Carbon
+    {
         return $originalMail instanceof ExpiringMailMessage && $originalMail->expirationDate()
             ? $originalMail->expirationDate()
             : now()->addDays(config('expiring-email.default_expiration_days'));
