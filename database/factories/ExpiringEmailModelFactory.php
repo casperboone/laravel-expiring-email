@@ -9,6 +9,11 @@ class ExpiringEmailModelFactory extends Factory
 {
     protected $model = ExpiringEmailModel::class;
 
+    public function expiresInDays(int $days): ExpiringEmailModelFactory
+    {
+        return $this->state(['expires_at' => now()->addDay($days)]);
+    }
+
     public function definition()
     {
         return [

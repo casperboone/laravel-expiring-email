@@ -2,6 +2,7 @@
 
 namespace CasperBoone\LaravelExpiringEmail;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
@@ -22,6 +23,11 @@ class ExpiringEmailModel extends Model
         static::creating(function (ExpiringEmailModel $expiringEmail) {
             $expiringEmail->random_identifier = Str::random(64);
         });
+    }
+
+    public function scopeExpired(Builder $query): Builder
+    {
+        return $query->where('expires_at', '<=', now());
     }
 
     public function isExpired(): bool

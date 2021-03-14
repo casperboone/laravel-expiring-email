@@ -36,9 +36,20 @@ You can optionally publish the views to customize the replacement email with:
 php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="laravel-expiring-email-views"
 ```
 
+An email immediately becomes inaccessible after the expiration date.
+However, to also remove the emails from your database after the expiration date, you should [schedule](https://laravel.com/docs/8.x/scheduling#defining-schedules) "clean" command to be run daily.
+```php
+// app/Console/Kernel.php
+
+protected function schedule(Schedule $schedule)
+{
+    $schedule->command(CleanExpiredEmails::class)->daily();
+}
+```
+
 ## Usage
 
-The basic usage of this package is very easy, all you need to do is replace `'email'` in your `via()` method of a notification to the expiring email notification channel.
+The basic usage of this package is very easy, all you need to do is replace `'email'` in your `via()` method of a [notification](https://laravel.com/docs/8.x/notifications) to the expiring email notification channel.
 
 ```diff
  public function via($notifiable): array
@@ -48,7 +59,7 @@ The basic usage of this package is very easy, all you need to do is replace `'em
  }
 ```
 
-This sends an email to the original receiver with a secret expiring link to the content of the original email.
+This sends an email to the original receiver with a [signed](https://laravel.com/docs/8.x/urls#signed-urls) expiring link to the content of the original email.
 The default expiration date is set in the config file but can be set on a case-by-case basis in the notification using `ExpiringMailMessage`:
 
 ```diff
@@ -61,7 +72,6 @@ The default expiration date is set in the config file but can be set on a case-b
          ->markdown('secret_document_email');
  }
 ```
-
 
 ## Development
 
