@@ -10,6 +10,7 @@ use CasperBoone\LaravelExpiringEmail\Tests\Fakes\FakeUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 
 class ExpiringEmailTest extends TestCase
 {
@@ -38,7 +39,9 @@ class ExpiringEmailTest extends TestCase
 
         $mail = new ExpiringEmailAvailableMail($expiringEmail);
 
-        $mail->assertSeeInHtml(route('expiring_mail.show', $expiringEmail->random_identifier));
+        $this->assertTrue(
+            Str::contains($mail->render(), route('expiring_mail.show', $expiringEmail->random_identifier))
+        );
     }
 
     /** @test */
