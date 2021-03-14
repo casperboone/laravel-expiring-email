@@ -57,7 +57,7 @@ The default expiration date is set in the config file but can be set on a case-b
 -    return (new MailMessage)
 +    return (new ExpiringMailMessage)
          ->subject('Secret document')
-+        ->expiresInDays($this->expiresInDays)
++        ->expiresInDays(7)
          ->markdown('secret_document_email');
  }
 ```
