@@ -2,7 +2,6 @@
 
 namespace CasperBoone\LaravelExpiringEmail\Tests\Fakes;
 
-use App\Models\Membership;
 use CasperBoone\LaravelExpiringEmail\ExpiringEmailChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

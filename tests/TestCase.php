@@ -2,10 +2,10 @@
 
 namespace CasperBoone\LaravelExpiringEmail\Tests;
 
+use CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as Orchestra;
-use CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider;
 
 class TestCase extends Orchestra
 {

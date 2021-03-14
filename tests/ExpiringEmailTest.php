@@ -22,7 +22,9 @@ class ExpiringEmailTest extends TestCase
 
         Notification::send(new FakeUser('henk@example.com'), new FakeEmailOverExpiringChannelNotification);
 
-        Mail::assertSent(ExpiringEmailAvailableMail::class, fn(ExpiringEmailAvailableMail $mail) =>
+        Mail::assertSent(
+            ExpiringEmailAvailableMail::class,
+            fn (ExpiringEmailAvailableMail $mail) =>
             $mail->build() &&
             $mail->subject == 'Secret document' &&
             $mail->hasTo('henk@example.com')
