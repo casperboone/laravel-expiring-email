@@ -3,17 +3,17 @@
 namespace CasperBoone\LaravelExpiringEmail\Tests;
 
 use CasperBoone\LaravelExpiringEmail\Commands\CleanExpiredEmails;
-use CasperBoone\LaravelExpiringEmail\ExpiringEmailModel;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 
 class CleanExpiredEmailsTest extends TestCase
 {
     /** @test */
     public function it_cleans_all_expired_emails()
     {
-        $expiresA = ExpiringEmailModel::factory()->expiresInDays(-5)->create();
-        $expiresB = ExpiringEmailModel::factory()->expiresInDays(-2)->create();
-        $remainsA = ExpiringEmailModel::factory()->expiresInDays(1)->create();
-        $remainsB = ExpiringEmailModel::factory()->expiresInDays(10)->create();
+        $expiresA = ExpiringEmail::factory()->expiresInDays(-5)->create();
+        $expiresB = ExpiringEmail::factory()->expiresInDays(-2)->create();
+        $remainsA = ExpiringEmail::factory()->expiresInDays(1)->create();
+        $remainsB = ExpiringEmail::factory()->expiresInDays(10)->create();
 
         $this->artisan(CleanExpiredEmails::class);
 

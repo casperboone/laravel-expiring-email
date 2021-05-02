@@ -2,8 +2,8 @@
 
 namespace CasperBoone\LaravelExpiringEmail\Tests;
 
-use CasperBoone\LaravelExpiringEmail\ExpiringEmailModel;
 use CasperBoone\LaravelExpiringEmail\Mail\ExpiringEmailAvailableMail;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use CasperBoone\LaravelExpiringEmail\Tests\Fakes\FakeEmailOverExpiringChannelNotification;
 use CasperBoone\LaravelExpiringEmail\Tests\Fakes\FakeExpiringEmailOverExpiringChannelNotification;
 use CasperBoone\LaravelExpiringEmail\Tests\Fakes\FakeUser;
@@ -35,7 +35,7 @@ class ExpiringEmailTest extends TestCase
     /** @test */
     public function it_has_a_link_to_the_full_email_in_the_replacement_email()
     {
-        $expiringEmail = ExpiringEmailModel::factory()->create();
+        $expiringEmail = ExpiringEmail::factory()->create();
 
         $mail = new ExpiringEmailAvailableMail($expiringEmail);
 
@@ -51,7 +51,7 @@ class ExpiringEmailTest extends TestCase
 
         Notification::send(new FakeUser, new FakeEmailOverExpiringChannelNotification);
 
-        $expiringEmail = ExpiringEmailModel::first();
+        $expiringEmail = ExpiringEmail::first();
         $expiringEmailPage = $this->get($expiringEmail->url());
         $expiringEmailPage->assertSee("This is a very secret document");
         $expiringEmailPage->assertSee("Nobody can know about this");
@@ -64,7 +64,7 @@ class ExpiringEmailTest extends TestCase
 
         Notification::send(new FakeUser, new FakeExpiringEmailOverExpiringChannelNotification(5));
 
-        $expiringEmail = ExpiringEmailModel::first();
+        $expiringEmail = ExpiringEmail::first();
         $url = $expiringEmail->url(); // Expiration date in URL needs to be in the future
         $expiringEmail->update(['expires_at' => now()->subDays(6)]);
 
@@ -78,7 +78,7 @@ class ExpiringEmailTest extends TestCase
 
         Notification::send(new FakeUser, new FakeExpiringEmailOverExpiringChannelNotification(5));
 
-        $expiringEmail = ExpiringEmailModel::first();
+        $expiringEmail = ExpiringEmail::first();
         $url = substr($expiringEmail->url(), 0, -4).'AbCd'; // Tamper with url
 
         $this->get($url)->assertNotFound();

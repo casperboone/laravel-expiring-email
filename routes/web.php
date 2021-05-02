@@ -1,13 +1,13 @@
 <?php
 
-use CasperBoone\LaravelExpiringEmail\ExpiringEmailModel;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/secure-mail/{expiringEmailIdentifier}', function (Request $request, $expiringEmailIdentifier) {
     abort_if(!$request->hasValidSignature(), 404);
 
-    $email = ExpiringEmailModel::where('random_identifier', $expiringEmailIdentifier)->firstOrFail();
+    $email = ExpiringEmail::where('random_identifier', $expiringEmailIdentifier)->firstOrFail();
 
     abort_if($email->isExpired(), 404);
 

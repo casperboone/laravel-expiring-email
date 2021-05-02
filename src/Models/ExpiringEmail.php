@@ -1,6 +1,6 @@
 <?php
 
-namespace CasperBoone\LaravelExpiringEmail;
+namespace CasperBoone\LaravelExpiringEmail\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
-class ExpiringEmailModel extends Model
+class ExpiringEmail extends Model
 {
     use HasFactory;
 
-    protected $table = 'expiring_emails';
     protected $guarded = [];
     protected $dates = ['expires_at'];
 
@@ -20,7 +19,7 @@ class ExpiringEmailModel extends Model
     {
         parent::boot();
 
-        static::creating(function (ExpiringEmailModel $expiringEmail) {
+        static::creating(function (ExpiringEmail $expiringEmail) {
             $expiringEmail->random_identifier = Str::random(64);
         });
     }

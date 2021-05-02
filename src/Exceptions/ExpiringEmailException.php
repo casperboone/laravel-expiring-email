@@ -1,6 +1,6 @@
 <?php
 
-namespace Casperboone\LaravelExpiringEmail\Exceptions;
+namespace CasperBoone\LaravelExpiringEmail\Exceptions;
 
 use Exception;
 

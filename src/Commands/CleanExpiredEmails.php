@@ -2,7 +2,7 @@
 
 namespace CasperBoone\LaravelExpiringEmail\Commands;
 
-use CasperBoone\LaravelExpiringEmail\ExpiringEmailModel;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use Illuminate\Console\Command;
 
 class CleanExpiredEmails extends Command
@@ -13,10 +13,10 @@ class CleanExpiredEmails extends Command
 
     public function handle(): void
     {
-        $count = ExpiringEmailModel::expired()->count();
+        $count = ExpiringEmail::expired()->count();
         $this->comment("Removing {$count} expired emails...");
 
-        ExpiringEmailModel::expired()->delete();
+        ExpiringEmail::expired()->delete();
 
         $this->comment("All expired emails have been removed.");
     }

@@ -2,6 +2,7 @@
 
 namespace CasperBoone\LaravelExpiringEmail;
 
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use CasperBoone\LaravelExpiringEmail\Exceptions\InvalidEmailException;
 use CasperBoone\LaravelExpiringEmail\Mail\ExpiringEmailAvailableMail;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -32,7 +33,7 @@ class ExpiringEmailChannel
         }
 
         // Persist original mail in database
-        $expiringEmail = ExpiringEmailModel::create([
+        $expiringEmail = ExpiringEmail::create([
             'recipient' => $recipient,
             'subject' => $originalMail->subject,
             'body' => $originalMail->render(),

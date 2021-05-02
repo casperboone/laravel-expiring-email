@@ -2,19 +2,19 @@
 
 namespace CasperBoone\LaravelExpiringEmail\Database\Factories;
 
-use CasperBoone\LaravelExpiringEmail\ExpiringEmailModel;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ExpiringEmailModelFactory extends Factory
+class ExpiringEmailFactory extends Factory
 {
-    protected $model = ExpiringEmailModel::class;
+    protected $model = ExpiringEmail::class;
 
-    public function expiresInDays(int $days): ExpiringEmailModelFactory
+    public function expiresInDays(int $days): self
     {
         return $this->state(['expires_at' => now()->addDay($days)]);
     }
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'recipient' => $this->faker->email,

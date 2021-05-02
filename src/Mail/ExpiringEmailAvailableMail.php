@@ -2,14 +2,14 @@
 
 namespace CasperBoone\LaravelExpiringEmail\Mail;
 
-use CasperBoone\LaravelExpiringEmail\ExpiringEmailModel;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use Illuminate\Mail\Mailable;
 
 class ExpiringEmailAvailableMail extends Mailable
 {
-    public ExpiringEmailModel $expiringEmail;
+    public ExpiringEmail $expiringEmail;
 
-    public function __construct(ExpiringEmailModel $expiringEmail)
+    public function __construct(ExpiringEmail $expiringEmail)
     {
         $this->expiringEmail = $expiringEmail;
     }
