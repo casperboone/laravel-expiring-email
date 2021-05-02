@@ -2,9 +2,9 @@
 
 namespace CasperBoone\LaravelExpiringEmail;
 
-use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use CasperBoone\LaravelExpiringEmail\Exceptions\InvalidEmailException;
 use CasperBoone\LaravelExpiringEmail\Mail\ExpiringEmailAvailableMail;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmailAttachment;
 use Illuminate\Mail\Message;
 use Illuminate\Notifications\Messages\MailMessage;
