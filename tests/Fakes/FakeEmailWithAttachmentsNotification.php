@@ -28,7 +28,7 @@ class FakeEmailWithAttachmentsNotification extends Notification
             ->subject('Secret document')
             ->markdown('secret_document_email');
 
-        collect($this->attributeSetters)->each(fn($handler) => $handler($message));
+        collect($this->attributeSetters)->each(fn ($handler) => $handler($message));
 
         return $message;
     }

@@ -21,7 +21,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile));
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
         $expiringEmail = ExpiringEmail::first();
@@ -38,9 +38,9 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile, [
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile, [
                 'as' => 'custom.jpg',
-                'mime' => 'image/png'
+                'mime' => 'image/png',
             ]));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
@@ -77,8 +77,8 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attachData(file_get_contents($temporaryFile), 'image_a.png'))
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile, ['as' => 'image_b.png']));
+            ->setAttribute(fn (MailMessage $message) => $message->attachData(file_get_contents($temporaryFile), 'image_a.png'))
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile, ['as' => 'image_b.png']));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
         $expiringEmail = ExpiringEmail::first();
@@ -94,7 +94,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile));
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
         $attachment = ExpiringEmail::first()->attachments->first();
@@ -112,7 +112,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile));
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
         $expiringEmail = ExpiringEmail::first();
@@ -130,7 +130,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile));
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
         $expiringEmail = ExpiringEmail::first();
@@ -148,7 +148,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
 
         $temporaryFile = __DIR__ . '/resources/hugo-ruiz-e2pVrE1PYzs-unsplash.jpeg';
         $notification = (new FakeEmailWithAttachmentsNotification())
-            ->setAttribute(fn(MailMessage $message) => $message->attach($temporaryFile));
+            ->setAttribute(fn (MailMessage $message) => $message->attach($temporaryFile));
         Notification::send(new FakeUser('henk@example.com'), $notification);
 
         $attachment = ExpiringEmail::first()->attachments->first();
