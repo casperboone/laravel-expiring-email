@@ -22,18 +22,18 @@ composer require casperboone/laravel-expiring-email
 You should publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="laravel-expiring-email-migrations"
+php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="expiring-email-migrations"
 php artisan migrate
 ```
 
 You can optionally publish the config file with:
 ```bash
-php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="laravel-expiring-email-config"
+php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="expiring-email-config"
 ```
 
 You can optionally publish the views to customize the replacement email with:
 ```bash
-php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="laravel-expiring-email-views"
+php artisan vendor:publish --provider="CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider" --tag="expiring-email-views"
 ```
 
 An email immediately becomes inaccessible after the expiration date.

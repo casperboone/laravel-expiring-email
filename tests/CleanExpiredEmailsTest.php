@@ -4,6 +4,7 @@ namespace CasperBoone\LaravelExpiringEmail\Tests;
 
 use CasperBoone\LaravelExpiringEmail\Commands\CleanExpiredEmails;
 use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
+use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmailAttachment;
 
 class CleanExpiredEmailsTest extends TestCase
 {
@@ -21,5 +22,17 @@ class CleanExpiredEmailsTest extends TestCase
         $this->assertNull($expiresB->fresh());
         $this->assertNotNull($remainsA->fresh());
         $this->assertNotNull($remainsB->fresh());
+    }
+
+    /** @test */
+    public function it_removes_attachments()
+    {
+        $expiredEmail = ExpiringEmail::factory()->expiresInDays(-5)->create();
+        $attachment = ExpiringEmailAttachment::factory()->for($expiredEmail)->create();
+
+        $this->artisan(CleanExpiredEmails::class);
+
+        $this->assertNull($expiredEmail->fresh());
+        $this->assertNull($attachment->fresh());
     }
 }

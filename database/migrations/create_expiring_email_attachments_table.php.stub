@@ -1,0 +1,26 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateExpiringEmailAttachmentsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('expiring_email_attachments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('expiring_email_id');
+            $table->string('filename');
+            $table->string('mime_type');
+            $table->binary('contents');
+            $table->string('random_identifier')->index();
+            $table->timestamps();
+
+            $table->foreign('expiring_email_id')
+                ->references('id')
+                ->on('expiring_emails')
+                ->onDelete('cascade');
+        });
+    }
+}

@@ -21,6 +21,7 @@ class LaravelExpiringEmailServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasCommand(CleanExpiredEmails::class)
             ->hasMigration('create_expiring_emails_table')
+            ->hasMigration('create_expiring_email_attachments_table')
             ->hasRoute('web');
     }
 }

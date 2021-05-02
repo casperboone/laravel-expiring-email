@@ -4,6 +4,7 @@ namespace CasperBoone\LaravelExpiringEmail\Tests;
 
 use CasperBoone\LaravelExpiringEmail\LaravelExpiringEmailServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -42,5 +43,11 @@ class TestCase extends Orchestra
 
         include_once __DIR__.'/../database/migrations/create_expiring_emails_table.php.stub';
         (new \CreateExpiringEmailsTable())->up();
+
+        include_once __DIR__.'/../database/migrations/create_expiring_email_attachments_table.php.stub';
+        (new \CreateExpiringEmailAttachmentsTable())->up();
+
+        // Explicitly enable foreign key constrains for sqlite.
+        DB::connection()->getSchemaBuilder()->enableForeignKeyConstraints();
     }
 }

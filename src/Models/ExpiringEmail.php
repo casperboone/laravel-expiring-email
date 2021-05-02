@@ -5,6 +5,7 @@ namespace CasperBoone\LaravelExpiringEmail\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,11 @@ class ExpiringEmail extends Model
         static::creating(function (ExpiringEmail $expiringEmail) {
             $expiringEmail->random_identifier = Str::random(64);
         });
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(ExpiringEmailAttachment::class);
     }
 
     public function scopeExpired(Builder $query): Builder
