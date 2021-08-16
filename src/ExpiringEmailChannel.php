@@ -6,6 +6,7 @@ use CasperBoone\LaravelExpiringEmail\Exceptions\InvalidEmailException;
 use CasperBoone\LaravelExpiringEmail\Mail\ExpiringEmailAvailableMail;
 use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmail;
 use CasperBoone\LaravelExpiringEmail\Models\ExpiringEmailAttachment;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Message;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -47,7 +48,11 @@ class ExpiringEmailChannel
         $expiringEmail->attachments()->saveMany($this->getAttachments($originalMail));
 
         // Send new email with link to original email
-        Mail::to($recipient)->send(new ExpiringEmailAvailableMail($expiringEmail));
+        if ($originalMail instanceof ShouldQueue) {
+            Mail::to($recipient)->queue(new ExpiringEmailAvailableMail($expiringEmail));
+        } else {
+            Mail::to($recipient)->send(new ExpiringEmailAvailableMail($expiringEmail));
+        }
     }
 
     private function getExpirationDate(MailMessage $originalMail): ?Carbon
