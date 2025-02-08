@@ -80,11 +80,6 @@ The default expiration date is set in the config file but can be set on a case-b
 composer test
 ```
 
-**Static analysis**
-```bash
-composer psalm
-```
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

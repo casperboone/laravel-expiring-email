@@ -24,8 +24,6 @@ class ExpiringEmailChannel
      * @param \Illuminate\Notifications\Notification $notification
      * @return void
      * @throws InvalidEmailException
-     *
-     * @psalm-suppress UndefinedMethod The toMail method can only be assumed dynamically
      */
     public function send($notifiable, Notification $notification)
     {
