@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mime\Part\DataPart;
 
 class ExpiringEmailChannel
 {
@@ -32,7 +33,7 @@ class ExpiringEmailChannel
         $originalMail = $notification->toMail($notifiable);
         $recipient = $notifiable->routeNotificationFor('mail', $notification);
 
-        if (! $recipient) {
+        if (!$recipient) {
             throw InvalidEmailException::forEmail($recipient);
         }
 
@@ -64,7 +65,7 @@ class ExpiringEmailChannel
 
     private function getAttachments(MailMessage $originalMail): Collection
     {
-        $temporaryMessage = new Message(new \Swift_Message);
+        $temporaryMessage = new Message(new \Symfony\Component\Mime\Email);
 
         foreach ($originalMail->attachments as $attachment) {
             $temporaryMessage->attach($attachment['file'], $attachment['options']);
@@ -74,11 +75,10 @@ class ExpiringEmailChannel
             $temporaryMessage->attachData($attachment['data'], $attachment['name'], $attachment['options']);
         }
 
-        return collect($temporaryMessage->getSwiftMessage()->getChildren())
-            ->filter(fn ($child) => $child instanceof \Swift_Attachment)
-            ->map(fn (\Swift_Attachment $attachment) => ExpiringEmailAttachment::make([
+        return collect($temporaryMessage->getAttachments())
+            ->map(fn(DataPart $attachment) => ExpiringEmailAttachment::make([
                 'filename' => $attachment->getFilename(),
-                'mime_type' => $attachment->getBodyContentType(),
+                'mime_type' => $attachment->getContentType(),
                 'contents' => $attachment->getBody(),
             ]));
     }
