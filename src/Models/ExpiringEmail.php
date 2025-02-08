@@ -14,7 +14,9 @@ class ExpiringEmail extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $dates = ['expires_at'];
+    protected $casts = [
+        'expires_at' => 'datetime',
+    ];
 
     protected static function boot()
     {
