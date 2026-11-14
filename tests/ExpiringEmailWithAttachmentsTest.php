@@ -9,12 +9,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 
 class ExpiringEmailWithAttachmentsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_converts_and_persists_file_attachments()
     {
         Mail::fake();
@@ -31,7 +32,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $this->assertEquals('image/jpeg', $expiringEmail->attachments[0]->mime_type);
     }
 
-    /** @test */
+    #[Test]
     public function it_converts_and_persists_file_attachments_with_custom_options()
     {
         Mail::fake();
@@ -51,7 +52,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $this->assertEquals('image/png', $expiringEmail->attachments[0]->mime_type);
     }
 
-    /** @test */
+    #[Test]
     public function it_converts_and_persists_raw_data_attachments()
     {
         Mail::fake();
@@ -70,7 +71,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $this->assertEquals('application/pdf', $expiringEmail->attachments[0]->mime_type);
     }
 
-    /** @test */
+    #[Test]
     public function it_converts_and_persists_multiple_attachments()
     {
         Mail::fake();
@@ -87,7 +88,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $this->assertEquals('image_a.png', $expiringEmail->attachments[1]->filename);
     }
 
-    /** @test */
+    #[Test]
     public function it_makes_the_attachment_available_for_download()
     {
         Mail::fake();
@@ -105,7 +106,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $this->assertEquals(md5_file($temporaryFile), md5($response->streamedContent()));
     }
 
-    /** @test */
+    #[Test]
     public function it_makes_the_attachment_available_for_download_on_the_expiring_email_page()
     {
         Mail::fake();
@@ -123,7 +124,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $expiringEmailPage->assertSee(route('expiring_mail.attachments.show', $attachment->random_identifier));
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_provide_attachments_for_expired_emails()
     {
         Mail::fake();
@@ -141,7 +142,7 @@ class ExpiringEmailWithAttachmentsTest extends TestCase
         $this->get($url)->assertNotFound();
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_provide_attachments_if_the_url_is_tampered_with()
     {
         Mail::fake();

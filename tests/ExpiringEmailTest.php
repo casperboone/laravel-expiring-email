@@ -11,12 +11,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 
 class ExpiringEmailTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_sends_a_replacement_email()
     {
         Mail::fake();
@@ -32,7 +33,7 @@ class ExpiringEmailTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_has_a_link_to_the_full_email_in_the_replacement_email()
     {
         $expiringEmail = ExpiringEmail::factory()->create();
@@ -44,7 +45,7 @@ class ExpiringEmailTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_provides_a_display_page_with_the_secret_content_of_the_original_mail()
     {
         Mail::fake();
@@ -57,7 +58,7 @@ class ExpiringEmailTest extends TestCase
         $expiringEmailPage->assertSee("Nobody can know about this");
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_show_expiring_emails_that_are_expired_on_the_display_page()
     {
         Mail::fake();
@@ -71,7 +72,7 @@ class ExpiringEmailTest extends TestCase
         $this->get($url)->assertNotFound();
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_show_emails_if_the_url_is_tampered_with_on_the_display_page()
     {
         Mail::fake();
